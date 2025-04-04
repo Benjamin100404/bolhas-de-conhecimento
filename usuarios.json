@@ -1,0 +1,19 @@
+{
+    "alunos": [
+        {
+            "nome": "Killua",
+            "matricula": "20240003",
+            "senha": "patafedida"
+        },
+        {
+            "nome": "Keiko",
+            "matricula": "20240003",
+            "senha": "cufedido"
+        },
+        {
+            "nome": "Igor",
+            "matricula": "10042004",
+            "senha": "GodiMorning"
+        }
+    ]
+}
