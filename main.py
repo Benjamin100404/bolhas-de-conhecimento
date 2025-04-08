@@ -3,13 +3,6 @@ import os
 
 ALUNOS_USUARIOS = 'usuarios.json'
 
-def main():
-    print("Bem-vindo à Bolha de Conhecimento")
-
-
-if __name__ == "__main__":
-    main()
-
 def carregar_dados():
     if os.path.exists(ALUNOS_USUARIOS):  
         with open(ALUNOS_USUARIOS, 'r', encoding='utf-8') as arquivo:
@@ -46,4 +39,42 @@ def cadastrar_aluno():
     salvar_dados(dados)
     print("\nAluno cadastrado com sucesso!")
 
-cadastrar_aluno()gi
+def login():
+    print("=============== LOGIN ================")
+    matricula = input("Insira sua matrícula: ")
+    senha = input("Insira sua senha: ")
+    cadastros = carregar_dados()
+    
+    for aluno in cadastros["alunos"]:
+        if aluno["matricula"] == matricula:
+            if aluno["senha"] == senha:
+                print("Login com sucesso!")
+                return True  # Retorna True para indicar login bem-sucedido
+            else:
+                print("Senha incorreta")
+                return False  # Retorna False para indicar falha no login
+    
+    # Se chegou aqui, a matrícula não foi encontrada
+    print("Matrícula não cadastrada")
+    return False
+           
+def main():
+    print("Bem-vindo à Bolha de Conhecimento")
+    while True:
+        print("\n======== MENU PRINCIPAL ========")
+        option = input("1 - Fazer Login\n2 - Fazer Cadastro\n3 - Sair\nEscolha uma opção: ")
+        
+        if option == "1":
+            if login():  # Se o login for bem-sucedido
+                menu_aluno()  # Chama o menu do aluno (você precisa implementar esta função)
+        elif option == "2":
+            cadastrar_aluno()
+        elif option == "3":
+            print("Saindo do sistema...")
+            break
+        else:
+            print("Opção inválida! Por favor, escolha 1, 2 ou 3.")
+
+
+if __name__ == "__main__":
+    main()
