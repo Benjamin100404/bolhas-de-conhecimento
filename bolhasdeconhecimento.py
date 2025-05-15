@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 ALUNOS_USUARIOS = 'usuarios.json'
-URL_VIDEO = ""
+URL_VIDEO = "https://youtu.be/dPX9vb3e-d8"
 
 def carregar_dados():
     if os.path.exists(ALUNOS_USUARIOS):
@@ -173,6 +173,14 @@ def login():
             print("Login com sucesso!")
             print(f"\nOlá {aluno['nome']}")
             print("Bem-vindo à Bolhas de conhecimento!")
+            print("\nNossa plataforma é bem fácil de usar. Em cada etapa, você encontrará materiais de aprendizado e atividades para praticar. O nosso ponto de partida é preparar o seu computador para essa jornada. Para isso, preparamos um vídeo tutorial bem curtinho que vai te mostrar como instalar dois programas importantes: o Python, que é a linguagem de programação que vamos aprender, e o VS Code, que é onde vamos escrever os nossos códigos. Depois de assistir ao vídeo e instalar os programas, você estará pronto para seguir para a próxima bolha de conhecimento! Lá, você encontrará explicações e exercícios práticos para começar a programar, entender sobre segurança na internet e aprender a pensar como um programador.")
+
+            input("\n\nPressione ENTER para avançar...")
+
+            print(f"""\nAssista ao vídeo de instalação aqui: {URL_VIDEO}
+Depois de assistir ao vídeo e instalar os programas, você estará pronto para seguir para a próxima bolha de conhecimento!""")
+                
+            input("\n\nPressione ENTER para avançar...")
             while True:
                 escolha = menu_ensino()
                 if escolha == '1':
