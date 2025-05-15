@@ -4,6 +4,19 @@ from datetime import datetime
 
 ALUNOS_USUARIOS = 'usuarios.json'
 URL_VIDEO = "https://youtu.be/dPX9vb3e-d8"
+DESLOCAMENTO_CIFRA = 3
+
+def cifra_cesar(senha, deslocamento=DESLOCAMENTO_CIFRA):
+    senha_criptografada = ''
+    for caractere in senha:
+        if caractere.isalpha():
+            base = ord('A') if caractere.isupper() else ord('a')
+            nova_letra = chr((ord(caractere) - base + deslocamento) % 26 + base)
+            senha_criptografada += nova_letra
+        else:
+            senha_criptografada += caractere
+    return senha_criptografada
+
 
 def carregar_dados():
     if os.path.exists(ALUNOS_USUARIOS):
@@ -29,7 +42,7 @@ def cadastrar_aluno():
     novo_aluno = {
         "nome": nome,
         "matricula": matricula,
-        "senha": senha,
+        "senha": cifra_cesar(senha),
         "notas": []
     }
     dados["alunos"].append(novo_aluno)
@@ -74,22 +87,11 @@ def bolha_3():
     print("Usar senhas fortes, tomar cuidado com links estranhos e não mostrar seu código para qualquer um são jeitos de se proteger. Também existem comandos em Python que ajudam a deixar o programa mais seguro. Com o tempo, você vai aprender a usar essas ferramentas para ser um programador esperto!")
     input("\n\nPressione ENTER para avançar à próxima bolha FINAL...\n")
 
-def bolha_4(matricula_atual):
-    
-    pontuacao = 0
-    print("O que é um \"algoritmo\" na programação? ")
-    print("a) Um tipo de computador")
-    print("b) Uma sequência de passos para resolver um problema")
-    print("c) Um programa de edição de fotos")
-    resposta_correta = "b"
-    resposta_aluno = input("\nEscolha a alternativa correta (a, b ou c): ").strip().lower()
-    if resposta_aluno == resposta_correta:
-        pontuacao += 25
-        print("\nParabéns! Você acertou!")
-    else:
-        print("\nOps! Não foi dessa vez.")
-    input("\nPressione ENTER para continuar...")
+def bolha4(pontuacao):
+    print("\nAgora vamos para a próxima fase!")
+    input("Pressione ENTER para continuar...")
 
+    # Pergunta 1
     print("Para que serve um fluxograma?")
     print("a) Mostrar o caminho que o programa segue, com ações e decisões")
     print("b) Desenhar personagens de jogos")
@@ -103,49 +105,61 @@ def bolha_4(matricula_atual):
         pontuacao += 25
         print("\nParabéns! Você acertou!")
     else:
-        print("\nOps! Não foi dessa vez.")
+        print(f"\nOps! Não foi dessa vez. A resposta correta é a letra {resposta_correta}.")
     input("\nPressione ENTER para continuar...")
 
-    print("Por que não devemos clicar em links estranhos que aparecem em jogos online?")
-    print("a) Porque podem ser golpes para roubar sua conta ou infectar o computador com vírus!")
-    print("b) Porque o link pode ser de um jogo novo e muito legal.")
-    print("c) Porque o link pode fazer seu computador ficar mais rápido.")
-    resposta_correta = "a"
-    resposta_aluno = input("\nEscolha a alternativa correta (a, b ou c): ").strip().lower()
-    if resposta_aluno == resposta_correta:
-        pontuacao += 25
-        print("\nParabéns! Você acertou!")
-    else:
-        print("\nOps! Não foi dessa vez.")
-    input("\nPressione ENTER para continuar...")
-
-    print("O que um 'antivírus' faz no computador?")
-    print("a) Toca música")
-    print("b) Protege contra vírus e hackers")
-    print("c) Aumenta o brilho da tela")
+    # Pergunta 2
+    print("O que representa o símbolo de losango em um fluxograma?")
+    print("a) Início ou fim do processo")
+    print("b) Uma decisão ou condição")
+    print("c) Um processo ou ação")
     resposta_correta = "b"
     resposta_aluno = input("\nEscolha a alternativa correta (a, b ou c): ").strip().lower()
+    while resposta_aluno not in ['a', 'b', 'c']:
+        print("Opção inválida! Por favor, escolha a, b ou c.")
+        resposta_aluno = input("Escolha a alternativa correta (a, b ou c): ").strip().lower()
     if resposta_aluno == resposta_correta:
         pontuacao += 25
         print("\nParabéns! Você acertou!")
     else:
-        print("\nOps! Não foi dessa vez.")
-    print(f"\nSua pontuação final: {pontuacao}/100")
+        print(f"\nOps! Não foi dessa vez. A resposta correta é a letra {resposta_correta}.")
+    input("\nPressione ENTER para continuar...")
 
-    dados = carregar_dados()
-    for aluno in dados["alunos"]:
-        if aluno["matricula"] == matricula_atual:
-            data_atual = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-            registro_nota = {
-                "pontuacao": pontuacao,
-                "data": data_atual
-            }
-            if "notas" not in aluno:
-                aluno["notas"] = []
-            aluno["notas"].append(registro_nota)
-            salvar_dados(dados)
-            break
-    input("\nPressione ENTER para finalizar...")
+    # Pergunta 3
+    print("Qual dos itens abaixo representa um símbolo de decisão em um fluxograma?")
+    print("a) Um retângulo")
+    print("b) Um losango")
+    print("c) Um círculo")
+    resposta_correta = "b"
+    resposta_aluno = input("\nEscolha a alternativa correta (a, b ou c): ").strip().lower()
+    while resposta_aluno not in ['a', 'b', 'c']:
+        print("Opção inválida! Por favor, escolha a, b ou c.")
+        resposta_aluno = input("Escolha a alternativa correta (a, b ou c): ").strip().lower()
+    if resposta_aluno == resposta_correta:
+        pontuacao += 25
+        print("\nParabéns! Você acertou!")
+    else:
+        print(f"\nOps! Não foi dessa vez. A resposta correta é a letra {resposta_correta}.")
+    input("\nPressione ENTER para continuar...")
+
+    # Pergunta 4
+    print("O que significa uma seta em um fluxograma?")
+    print("a) Início do programa")
+    print("b) Fim do programa")
+    print("c) O fluxo de execução do processo")
+    resposta_correta = "c"
+    resposta_aluno = input("\nEscolha a alternativa correta (a, b ou c): ").strip().lower()
+    while resposta_aluno not in ['a', 'b', 'c']:
+        print("Opção inválida! Por favor, escolha a, b ou c.")
+        resposta_aluno = input("Escolha a alternativa correta (a, b ou c): ").strip().lower()
+    if resposta_aluno == resposta_correta:
+        pontuacao += 25
+        print("\nParabéns! Você acertou!")
+    else:
+        print(f"\nOps! Não foi dessa vez. A resposta correta é a letra {resposta_correta}.")
+    input("\nPressione ENTER para continuar...")
+
+    return pontuacao
 
 def ver_historico(matricula_atual):
     dados = carregar_dados()
@@ -169,7 +183,7 @@ def login():
     senha = input("Insira sua senha: ")
     cadastros = carregar_dados()
     for aluno in cadastros["alunos"]:
-        if aluno["matricula"] == matricula and aluno["senha"] == senha:
+        if aluno["matricula"] == matricula and aluno["senha"] == cifra_cesar(senha):
             print("Login com sucesso!")
             print(f"\nOlá {aluno['nome']}")
             print("Bem-vindo à Bolhas de conhecimento!")
